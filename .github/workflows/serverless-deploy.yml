@@ -28,11 +28,11 @@ jobs:
 
       - name: "Deploy Cloud Function"
         run: |
-          gcloud functions deploy email-sender-production \
+          gcloud functions deploy email-sender-preview \
             --gen2 \
             --runtime=nodejs20 \
             --region=us-central1 \
             --source=. \
             --entry-point=sendAlertEmail \
-            --trigger-topic=alert-email-topic-production \
+            --trigger-topic=alert-email-topic-preview \
             --set-env-vars=SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }},FRONTEND_DOMAIN=${{ secrets.FRONTEND_DOMAIN }}
