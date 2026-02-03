@@ -31,7 +31,7 @@ jobs:
           gcloud functions deploy email-sender-preview \
             --gen2 \
             --runtime=nodejs20 \
-            --region=us-central1 \
+            --region=us-east1 \
             --source=. \
             --entry-point=sendAlertEmail \
             --trigger-topic=alert-email-topic-preview \
