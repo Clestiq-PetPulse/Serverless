@@ -1,0 +1,9 @@
+{
+  "name": "email-sender",
+  "version": "1.0.0",
+  "description": "Cloud Function to send alert emails via SendGrid",
+  "main": "index.js",
+  "dependencies": {
+    "@sendgrid/mail": "^7.7.0"
+  }
+}
