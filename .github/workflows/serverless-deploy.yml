@@ -1,0 +1,38 @@
+name: Deploy Email Cloud Function
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "**"
+
+jobs:
+  deploy-function:
+    runs-on: ubuntu-latest
+    if: github.repository == 'Clestiq-PetPulse/Serverless'
+    permissions:
+      contents: "read"
+      id-token: "write"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: "auth"
+        uses: "google-github-actions/auth@v2"
+        with:
+          credentials_json: "${{ secrets.GCP_SA_KEY }}"
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v2"
+
+      - name: "Deploy Cloud Function"
+        run: |
+          gcloud functions deploy email-sender-production \
+            --gen2 \
+            --runtime=nodejs20 \
+            --region=us-central1 \
+            --source=. \
+            --entry-point=sendAlertEmail \
+            --trigger-topic=alert-email-topic-production \
+            --set-env-vars=SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }},FRONTEND_DOMAIN=${{ secrets.FRONTEND_DOMAIN }}
