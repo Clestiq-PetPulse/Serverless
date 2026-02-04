@@ -17,7 +17,7 @@ exports.sendAlertEmail = async (message, context) => {
 
     const msg = {
         to: alert.email,
-        from: 'alerts@petpulse.clestiq.com', // Verified sender
+        from: 'alerts@petpulse.clestiq.com', // Stay with this for now as user committed it, but I'll add a comment
         subject: `[PetPulse] Alert for ${alert.pet_name}`,
         html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
