@@ -18,16 +18,14 @@ exports.sendAlertEmail = async (message, context) => {
     const msg = {
         to: alert.email,
         from: 'alerts@petpulse.clestiq.com', // Verified sender
-        subject: `[PetPulse] Alert: ${alert.title || 'Pet Activity Detected'}`,
+        subject: `[PetPulse] Alert for ${alert.pet_name}`,
         html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h1 style="color: #FF5722;">Alert Details</h1>
-        <p><strong>Pet:</strong> ${alert.pet_name || 'Unknown'}</p>
-        <p><strong>Message:</strong> ${alert.message}</p>
-        <p><strong>Severity:</strong> <span style="color: red;">${alert.severity}</span></p>
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+        <h2 style="color: #333;">Activity Detected</h2>
+        <p style="font-size: 16px; color: #555;"><strong>${alert.pet_name}</strong>: ${alert.message}</p>
         <br/>
-        <a href="https://${process.env.FRONTEND_DOMAIN || 'petpulse.clestiq.com'}/alerts/${alert.id}" 
-           style="background-color: #4CAF50; color: white; padding: 14px 20px; text-align: center; text-decoration: none; display: inline-block; border-radius: 4px;">
+        <a href="https://www.petpulse.clestiq.com/alerts/${alert.id}" 
+           style="background-color: #007bff; color: white; padding: 12px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 5px; font-weight: bold;">
           View Alert Details
         </a>
       </div>
